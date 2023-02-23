@@ -47,7 +47,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with: 
-          repository: $GITHUB_USERNAME/$GITHUB_REPO_NAME_K8S
+          repository: ${{ env.GITHUB_USERNAME }}/${{ env.GITHUB_REPO_NAME_K8S }}
           ref: 'master'
           token: ${{ secrets.K8S_GITHUB_TOKEN }}
       - name: setup git config
