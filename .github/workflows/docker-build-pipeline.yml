@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 env:
   IMAGE_NAME: django-website
+  DOCKERHUB_USERNAME: pinkeshceq
   GITHUB_USERNAME: pinkesh-ceq
   GITHUB_EMAIL: "pinkesh@cloudeq.com"
   GITHUB_REPO_NAME_K8S: django-website-kubernates-config
@@ -55,7 +56,7 @@ jobs:
           git config --global user.name "${{ env.GITHUB_USERNAME }}"
           git config --global user.email "${{ env.GITHUB_EMAIL }}"
           # sed -i "s#${{ github.actor }}.*#${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}"
-          sh "sed -i 's+${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}.*+${{ env.GITHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}+g' deployment.yaml"
+          sh "sed -i 's+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}.*+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}+g' deployment.yaml"
           git add -A
           git commit -m "Updated website version: ${{ github.run_number }}"
           git push origin master
