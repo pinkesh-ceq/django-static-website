@@ -8,8 +8,9 @@ env:
   IMAGE_NAME: django-website
   DOCKERHUB_USERNAME: pinkeshceq
   GITHUB_USERNAME: pinkesh-ceq
-  GITHUB_EMAIL: "pinkesh@cloudeq.com"
+  GITHUB_EMAIL: pinkesh@cloudeq.com
   GITHUB_REPO_NAME_K8S: django-website-kubernates-config
+  DEPLOYMENT_FILE: deployment.yml
 
 jobs:
   Docker_build_and_push:
@@ -56,7 +57,7 @@ jobs:
           git config --global user.name "${{ env.GITHUB_USERNAME }}"
           git config --global user.email "${{ env.GITHUB_EMAIL }}"
           # sed -i "s#${{ github.actor }}.*#${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}"
-          sh "sed -i 's+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}.*+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}+g' deployment.yml"
+          sh "sed -i 's+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}.*+${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}+g' ${{ env.DEPLOYMENT_FILE }}"
           git add -A
           git commit -m "Updated website version: ${{ github.run_number }}"
           git push origin master
