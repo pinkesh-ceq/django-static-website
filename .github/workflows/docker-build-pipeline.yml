@@ -61,3 +61,4 @@ jobs:
           git add -A
           git commit -m "Updated website version: ${{ github.run_number }}"
           git push origin master
+          
